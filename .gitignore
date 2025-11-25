@@ -205,3 +205,15 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Vesuvius Challenge - Raw data (large files)
+data/raw/*
+!data/raw/README.md
+
+# Model outputs
+outputs/
+*.pth
+*.pt
+
+# Kaggle
+*.kaggle/
