@@ -161,21 +161,23 @@ class UNet3D:
             Estimated number of parameters.
         """
         # Simplified parameter estimation
+        # KERNEL_3D_SIZE = 3 * 3 * 3 = 27 for 3D convolution kernel
+        kernel_3d_size = 27
         total = 0
         prev_ch = self.in_channels
         
         for feat in self.features:
             # Conv layers in encoder
-            total += prev_ch * feat * 27 + feat  # 3x3x3 kernel + bias
-            total += feat * feat * 27 + feat
+            total += prev_ch * feat * kernel_3d_size + feat  # 3x3x3 kernel + bias
+            total += feat * feat * kernel_3d_size + feat
             prev_ch = feat
         
         # Bottleneck
-        total += prev_ch * (prev_ch * 2) * 27 + (prev_ch * 2)
+        total += prev_ch * (prev_ch * 2) * kernel_3d_size + (prev_ch * 2)
         
         # Decoder (similar to encoder)
         for feat in reversed(self.features):
-            total += prev_ch * feat * 27 + feat
+            total += prev_ch * feat * kernel_3d_size + feat
             prev_ch = feat
         
         # Final conv

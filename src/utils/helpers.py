@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any, Dict, Optional, Tuple
 
 import numpy as np
+import yaml
 
 
 def set_seed(seed: int = 42) -> None:
@@ -35,8 +36,6 @@ def load_config(config_path: str) -> Dict[str, Any]:
     Returns:
         Configuration dictionary.
     """
-    import yaml
-    
     with open(config_path, "r") as f:
         config = yaml.safe_load(f)
     
@@ -190,10 +189,12 @@ def count_parameters(model: Any) -> int:
     Returns:
         Number of trainable parameters.
     """
-    # Placeholder for PyTorch models
+    # For PyTorch models:
     # return sum(p.numel() for p in model.parameters() if p.requires_grad)
+    # For placeholder models with get_params_count method:
     if hasattr(model, "get_params_count"):
         return model.get_params_count()
+    # TODO: Implement actual parameter counting when using real PyTorch models
     return 0
 
 

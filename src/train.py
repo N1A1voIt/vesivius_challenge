@@ -95,8 +95,8 @@ def train_one_epoch(
     Args:
         model: Model to train.
         train_loader: Training data loader.
-        criterion: Loss function.
-        optimizer: Optimizer.
+        criterion: Loss function (can be None for placeholder mode).
+        optimizer: Optimizer (can be None for placeholder mode).
         device: Device to train on.
         
     Returns:
@@ -104,16 +104,17 @@ def train_one_epoch(
     """
     loss_meter = AverageMeter()
     
-    # Placeholder training loop
-    # In practice, iterate through train_loader
+    # Placeholder training loop - replace with actual implementation
+    # when using PyTorch. The None checks allow running in demo mode.
     for i in range(len(train_loader)):
-        # Forward pass
-        # loss = criterion(outputs, labels)
-        
-        # Backward pass
-        # optimizer.zero_grad()
-        # loss.backward()
-        # optimizer.step()
+        if optimizer is not None and criterion is not None:
+            # Forward pass
+            # loss = criterion(outputs, labels)
+            # Backward pass
+            # optimizer.zero_grad()
+            # loss.backward()
+            # optimizer.step()
+            pass
         
         loss_meter.update(0.0)
     
@@ -131,7 +132,7 @@ def validate(
     Args:
         model: Model to validate.
         val_loader: Validation data loader.
-        criterion: Loss function.
+        criterion: Loss function (can be None for placeholder mode).
         device: Device to validate on.
         
     Returns:
@@ -141,10 +142,13 @@ def validate(
     dice_meter = AverageMeter()
     fbeta_meter = AverageMeter()
     
-    # Placeholder validation loop
+    # Placeholder validation loop - replace with actual implementation
+    # when using PyTorch. The None check allows running in demo mode.
     for i in range(len(val_loader)):
-        # outputs = model(inputs)
-        # loss = criterion(outputs, labels)
+        if criterion is not None:
+            # outputs = model(inputs)
+            # loss = criterion(outputs, labels)
+            pass
         
         loss_meter.update(0.0)
         dice_meter.update(0.0)
